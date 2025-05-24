@@ -12,7 +12,7 @@ export const routes: Routes = [
         title: 'Pagina Inicial'
     },
     {
-        path: 'Login',
+        path: 'login',
         component: LoginComponent,
         title: 'Pagina de Login'
     },
@@ -22,7 +22,7 @@ export const routes: Routes = [
         title: 'Cadastro'
     },
     {
-        path: 'Admin',
+        path: 'admin',
         component: PainelAdminComponent,
         title: 'Painel Admin'
     }
