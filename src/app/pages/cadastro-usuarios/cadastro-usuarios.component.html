@@ -14,6 +14,59 @@
       </div>
     </div>
     <div class="form-group">
+      <label for="signupSurname">Sobrenome</label>
+      <input
+        type="text"
+        id="signupSurname"
+        formControlName="surname"
+        [class.error]="signupForm.get('surname')?.invalid && signupForm.get('surname')?.touched"
+      />
+      <div *ngIf="signupForm.get('surname')?.invalid && signupForm.get('surname')?.touched" class="field-error">
+        <div *ngIf="signupForm.get('surname')?.errors?.['required']">Sobrenome é obrigatório</div>
+        <div *ngIf="signupForm.get('surname')?.errors?.['minlength']">Sobrenome deve ter pelo menos 2 caracteres</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="signupCpf">CPF</label>
+      <input
+        type="text"
+        id="signupCpf"
+        formControlName="cpf"
+        maxlength="11"
+        [class.error]="signupForm.get('cpf')?.invalid && signupForm.get('cpf')?.touched"
+      />
+      <div *ngIf="signupForm.get('cpf')?.invalid && signupForm.get('cpf')?.touched" class="field-error">
+        <div *ngIf="signupForm.get('cpf')?.errors?.['required']">CPF é obrigatório</div>
+        <div *ngIf="signupForm.get('cpf')?.errors?.['minlength'] || signupForm.get('cpf')?.errors?.['maxlength']">CPF deve ter 11 caracteres</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="signupBirthdate">Data de Nascimento</label>
+      <input
+        type="date"
+        id="signupBirthdate"
+        formControlName="birthdate"
+        [class.error]="signupForm.get('birthdate')?.invalid && signupForm.get('birthdate')?.touched"
+      />
+      <div *ngIf="signupForm.get('birthdate')?.invalid && signupForm.get('birthdate')?.touched" class="field-error">
+        <div *ngIf="signupForm.get('birthdate')?.errors?.['required']">Data de nascimento é obrigatória</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="signupPhone">Telefone Celular</label>
+      <input
+        type="text"
+        id="signupPhone"
+        formControlName="phone"
+        maxlength="15"
+        [class.error]="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched"
+      />
+      <div *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched" class="field-error">
+        <div *ngIf="signupForm.get('phone')?.errors?.['required']">Telefone é obrigatório</div>
+        <div *ngIf="signupForm.get('phone')?.errors?.['minlength']">Telefone deve ter pelo menos 11 caracteres</div>
+      </div>
+    </div>
+    <div class="form-group">
       <label for="signupEmail">E-mail</label>
       <input
         type="email"
