@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.service.listar().subscribe((produtos) => {
+    this.service.getAll().subscribe((produtos) => {
       this.ListaProdutos = produtos;
     })
   }

@@ -6,4 +6,7 @@ export interface Produto {
   imagem: string;
   categoria: string;
   descricao?: string;
+  ativo: boolean;
+  stock: number;
+  createdAt: Date; 
 }

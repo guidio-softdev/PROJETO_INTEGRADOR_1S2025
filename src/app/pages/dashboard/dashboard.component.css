@@ -1,0 +1,187 @@
+.dashboard-container {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.page-title {
+  margin-bottom: var(--space-5);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.stat-card {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+}
+
+.products-icon {
+  background-color: var(--primary-100);
+  color: var(--primary-600);
+}
+
+.users-icon {
+  background-color: var(--success-100);
+  color: var(--success-600);
+}
+
+.low-stock-icon {
+  background-color: var(--warning-100);
+  color: var(--warning-600);
+}
+
+.stat-content {
+  flex-grow: 1;
+}
+
+.stat-title {
+  font-size: 0.875rem;
+  color: var(--neutral-600);
+  margin-bottom: var(--space-1);
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+  color: var(--neutral-900);
+}
+
+.stat-info {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+}
+
+.stat-link {
+  position: absolute;
+  bottom: var(--space-3);
+  right: var(--space-4);
+  font-size: 0.875rem;
+  color: var(--primary-600);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-5);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+
+.product-cell,
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.product-image {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-info,
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-name,
+.user-name {
+  font-weight: 500;
+}
+
+.product-sku,
+.user-email {
+  font-size: 0.75rem;
+  color: var(--neutral-500);
+}
+
+.status-badge,
+.role-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-badge.active {
+  background-color: var(--success-500);
+  color: white;
+}
+
+.status-badge.inactive {
+  background-color: var(--neutral-500);
+  color: white;
+}
+
+.status-badge.pending {
+  background-color: var(--warning-500);
+  color: white;
+}
+
+.role-badge {
+  background-color: var(--neutral-200);
+  color: var(--neutral-700);
+}
+
+.role-badge.admin {
+  background-color: var(--primary-500);
+  color: white;
+}
+
+.role-badge.editor {
+  background-color: var(--secondary-500);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
