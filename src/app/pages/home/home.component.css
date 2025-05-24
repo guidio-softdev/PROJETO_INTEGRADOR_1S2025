@@ -1,3 +1,8 @@
+/* IMPORT DE FONTES */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&display=swap');
+
+
 /* ESTILOS GLOBAIS */
 html, body {
   height: 100%;
@@ -8,9 +13,6 @@ html, body {
   color: #ffffff;
 }
 
-/* IMPORT DE FONTES */
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&display=swap');
 
 /* NAVEGAÇÃO PRINCIPAL */
 .main-nav {
@@ -252,6 +254,16 @@ html, body {
   margin: 0 auto;
 }
 
+/* CONTEÚDO PRINCIPAL */
+.main-content {
+  padding: 20px;
+}
+
+.main-content2 {
+  margin-top: 200px;
+}
+
+/* Container principal do card */
 .card {
   background-color: #fff;
   color: #000;
@@ -272,6 +284,7 @@ html, body {
   box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
+/* Estilo da imagem */
 .card img {
   max-width: 100%;
   height: auto;
@@ -279,12 +292,14 @@ html, body {
   margin: 0 auto;
 }
 
+/* Estilo do texto do produto */
 .card p {
   font-size: 10px;
   font-weight: bold;
   padding: 8px;
 }
 
+/* Estilo específico do preço */
 .card .preco {
   font-size: 15px;
   font-weight: bold;
@@ -293,11 +308,13 @@ html, body {
   margin-bottom: 10px;
 }
 
+/* Container dos botões */
 .card-buttons {
   display: flex;
   border: none;
 }
 
+/* Estilo base dos botões */
 .card-buttons button {
   flex: 1;
   padding: 10px 0;
@@ -308,17 +325,12 @@ html, body {
   text-transform: uppercase;
   transition: background-color 0.3s ease;
   letter-spacing: 3px;
-  border: none;
 }
 
+/* Botão Detalhes */
 .btn-detalhes {
   background-color: #0d1117;
   color: white;
-}
-
-.btn-comprar {
-  background-color: #3CF6F6;
-  color: black;
 }
 
 .btn-detalhes:hover {
@@ -326,16 +338,13 @@ html, body {
   color: #3CF6F6;
 }
 
+/* Botão Comprar */
+.btn-comprar {
+  background-color: #3CF6F6;
+  color: black;
+}
+
 .btn-comprar:hover {
   background-color: #022d2d;
   color: #fff;
-}
-
-/* CONTEÚDO PRINCIPAL */
-.main-content {
-  padding: 20px;
-}
-
-.main-content2 {
-  margin-top: 200px;
 }
