@@ -1,0 +1,99 @@
+.main-header {
+  background-color: #0E151B;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.logo-container {
+  flex: 1;
+}
+.logo {
+  height: 40px;
+  width: auto;
+}
+.buscar-container {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  font-family: 'Lexend';
+}
+.busca-bar {
+  width: 80%;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 20px 0 0 20px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-family: 'Lexend';
+  outline: none;
+}
+.busca-btn {
+  padding: 10px 15px;
+  background-color: #0762A9;
+  color: white;
+  border: none;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.busca-btn:hover {
+  background-color: #5BFEFE;
+}
+.icons-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+.carrinho-btn {
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #0762A9;
+  cursor: pointer;
+  position: relative;
+}
+
+.carrinho-btn:hover {
+  color: #5BFEFE;
+}
+/* Primeira definição */
+.login-btn {
+  padding: 9px 25px;
+  background-color: #0762A9;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  transform: scale(0.8);
+  transform-origin: center;
+}
+
+/* Segunda definição (mais abaixo no CSS) */
+.login-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #415467;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Lexend';
+  margin-left: 30px;
+}

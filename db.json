@@ -1,0 +1,38 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Teclado gamer Attack Shark",
+      "preco": 300.00,
+      "marca": "Attack Shark",
+      "categoria": "Teclados",
+      "descricao": "switch vermelho",
+      "imagem": "tecladoAttackShark.png",
+      "ativo": true
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Admin",
+      "sobrenome": "admin",
+      "CPF": "333.333.333-33",
+      "dataNasc":"23/09/2005",
+      "celular": "(11) 96482-8962",
+      "email": "admin@email.com",
+      "senha": "admin123",
+      "admin": true
+    },
+    {
+      "id": 1,
+      "nome": "teste",
+      "sobrenome": "teste",
+      "CPF": "333.333.333-33",
+      "dataNasc":"23/09/2005",
+      "celular": "(11) 96482-8962",
+      "email": "admin@email.com",
+      "senha": "admin123",
+      "admin": false
+    }
+  ]
+}

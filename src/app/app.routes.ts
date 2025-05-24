@@ -1,3 +1,29 @@
 import { Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { CadastroUsuariosComponent } from './pages/cadastro-usuarios/cadastro-usuarios.component';
+import { PainelAdminComponent } from './pages/painel-admin/painel-admin.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+
+    {
+        path: '',
+        component: HomeComponent,
+        title: 'Pagina Inicial'
+    },
+    {
+        path: 'Login',
+        component: LoginComponent,
+        title: 'Pagina de Login'
+    },
+    {
+        path: 'cadastro',
+        component: CadastroUsuariosComponent,
+        title: 'Cadastro'
+    },
+    {
+        path: 'Admin',
+        component: PainelAdminComponent,
+        title: 'Painel Admin'
+    }
+];

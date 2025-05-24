@@ -1,0 +1,13 @@
+<div class="card">
+  <img [src]="'assets/imagens/' + product.imagem" [alt]="product.nome">
+  <div class="card-content">
+    <p><strong>{{ product.nome }}</strong></p>
+    <p class="marca">{{ product.marca }}</p>
+    <p class="preco">R$ {{ product.preco.toFixed(2).replace('.', ',') }}</p>
+    <span class="categoria">{{ product.categoria }}</span>
+    <div class="card-buttons">
+      <button class="btn-detalhes">Detalhes</button>
+      <button class="btn-comprar">Comprar</button>
+    </div>
+  </div>
+</div>

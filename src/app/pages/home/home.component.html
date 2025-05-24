@@ -1,0 +1,178 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechStorm</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&display=swap');
+  </style>
+</head>
+
+<body>
+
+  <nav class="main-nav">
+    <ul class="menu">
+      <li class="menu-item">Monitores</li>
+      <li class="menu-item">Fones de ouvido</li>
+      <li class="menu-item">Teclados</li>
+      <li class="menu-item">Mouses</li>
+      <li class="menu-item">Acessórios</li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <section class="banner">
+      <div class="banner-description">
+        <h1>HEADSET KNUP ONE LED PC PS4 X</h1>
+        <h2>Alto desempenho em áudio gamer com tecnologia Wireless</h2>
+        <p>
+          Desenvolvido para proporcionar uma experiência de jogo de alto nível, é a escolha definitiva para quem busca
+          alto
+          desempenho e conforto incomparáveis.
+        </p>
+        <p class="price">R$ 189,99</p>
+        <div class="action-buttons">
+          <button class="btn buy-btn">COMPRAR</button>
+          <button class="btn details-btn">DETALHES</button>
+        </div>
+      </div>
+
+      <div class="banner-image">
+        <img src="assets/imagens/Headset.png" alt="Headset Knup One" class="product-image" />
+      </div>
+    </section>
+
+    <section class="catalog">
+      <div class="catalog-title">
+        <h1> MELHORES OFERTAS PARA VOCÊ </h1>
+      </div>
+
+      <div class="container">
+        <!-- Mouse Gamer -->
+        <div class="card">
+          <img src="assets/imagens/MOUSE.png" alt="Mouse Gamer Anúbis 7 Botões LED RGB">
+          <p><strong>Mouse Gamer Anúbis 7 Botões LED RGB</strong></p>
+          <p class="preco">R$114,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+
+
+        <!-- Monitor Gamer -->
+        <div class="card">
+          <img src="assets/imagens/MONITOR.png" alt="Monitor Gamer 27' 144Hz">
+          <p><strong>Monitor Gamer 27' 144Hz</strong></p>
+          <p class="preco">R$1.299,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+
+
+        @if (carregando()) {
+        <div class="carregando">Carregando...</div>
+        } @else if (produtos().length === 0) {
+        <div class="sem-produtos">Sem produtos</div>
+        } @else {
+        <div class="grade-produtos">
+          @for (produto of produtos(); track produto.id) {
+          <app-card [product]="produto" />
+          }
+        </div>
+        }
+
+        <!-- Cadeira Gamer -->
+        <div class="card">
+          <img src="assets/imagens/CADEIRA.png" alt="Cadeira Gamer Profissional">
+          <p><strong>Cadeira Gamer Profissional</strong></p>
+          <p class="preco">R$899,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Teclado Mecânico -->
+        <div class="card">
+          <img src="assets/imagens/KEYCAP.png" alt="Teclado Mecânico RGB">
+          <p><strong>Teclado Mecânico RGB</strong></p>
+          <p class="preco">R$349,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Placa de Vídeo -->
+        <div class="card">
+          <img src="assets/imagens/PLACA DE VIDEO.png" alt="Placa de Vídeo RTX 3060">
+          <p><strong>Placa de Vídeo RTX 3060</strong></p>
+          <p class="preco">R$2.199,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Headphone -->
+        <div class="card">
+          <img src="assets/imagens/HEADSET2.png" alt="Headphone Gamer 7.1 Surround">
+          <p><strong>Headphone Gamer 7.1 Surround</strong></p>
+          <p class="preco">R$399,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Webcam -->
+        <div class="card">
+          <img src="assets/imagens/WEBCAM.png" alt="Webcam Full HD">
+          <p><strong>Webcam Full HD</strong></p>
+          <p class="preco">R$249,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Webcam -->
+        <div class="card">
+          <img src="assets/imagens/SUPORTE.png" alt="Webcam Full HD">
+          <p><strong>Webcam Full HD</strong></p>
+          <p class="preco">R$249,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Webcam -->
+        <div class="card">
+          <img src="assets/imagens/SUP PLACA DE VIDEO.png" alt="Webcam Full HD">
+          <p><strong>Webcam Full HD</strong></p>
+          <p class="preco">R$249,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+
+        <!-- Gabinete -->
+        <div class="card">
+          <img src="assets/imagens/GABINETE.png" alt="Gabinete Gamer com RGB">
+          <p><strong>Gabinete Gamer com RGB</strong></p>
+          <p class="preco">R$499,99</p>
+          <div class="card-buttons">
+            <button class="btn-detalhes">Detalhes</button>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
