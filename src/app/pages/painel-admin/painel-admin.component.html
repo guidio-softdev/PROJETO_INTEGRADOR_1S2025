@@ -1,70 +1,136 @@
-<body>
-    <!-- Sidebar -->
 <aside>
   <nav>
     <ul>
-      <li class="active">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/box.png" width="20" alt="icon">
+      <li [class.active]="painelAtivo === 'produtos'" (click)="selecionarPainel('produtos')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/box.png" width="20" alt="icon" />
         <span>Produto</span>
       </li>
-      <li>
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/user.png" width="20" alt="icon">
+      <li [class.active]="painelAtivo === 'usuarios'" (click)="selecionarPainel('usuarios')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/user.png" width="20" alt="icon" />
         <span>Usuários</span>
       </li>
       <li>
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/settings.png" width="20" alt="icon">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/settings.png" width="20" alt="icon" />
         <span>Configurações</span>
       </li>
       <li>
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/help.png" width="20" alt="icon">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/help.png" width="20" alt="icon" />
         <span>Ajuda</span>
       </li>
       <li>
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/exit.png" width="20" alt="icon">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/exit.png" width="20" alt="icon" />
         <span routerLink="">Sair</span>
       </li>
     </ul>
   </nav>
 </aside>
 
-<!-- Main Content -->
 <main>
   <header>
     <h2>Bem-vindo de volta, <span>Administrador</span>!</h2>
     <div class="user">
-      <img src="https://img.icons8.com/ios-filled/50/000000/user.png" width="24" alt="user-icon">
+      <img src="https://img.icons8.com/ios-filled/50/000000/user.png" width="24" alt="user-icon" />
       <span>ADMIN</span>
     </div>
   </header>
 
-  <section class="form-section">
-    <h3>Produtos - Cadastrar Produtos</h3>
-    <div class="form-container">
-      <input type="text" id="nome" placeholder="Nome">
-      <input type="text" id="categoria" placeholder="Categoria">
-      <input type="text" id="preco" placeholder="Preço">
-      <input type="text" id="marca" placeholder="Marca">
-      <button>CADASTRAR</button>
-    </div>
+  <!-- PRODUTOS -->
+  <section *ngIf="painelAtivo === 'produtos'">
+    <section class="form-section">
+      <h3>Produtos - Cadastrar Produtos</h3>
+      <form class="form-container" (ngSubmit)="onSubmit()" [formGroup]="produtoForm">
+        <input type="text" formControlName="nome" placeholder="Nome" />
+        <input type="text" formControlName="categoria" placeholder="Categoria" />
+        <input type="number" formControlName="preco" placeholder="Preço" />
+        <input type="text" formControlName="marca" placeholder="Marca" />
+        <input type="number" formControlName="quantidade" placeholder="Quantidade" />
+        <textarea formControlName="descricao" placeholder="Descrição"></textarea>
+        <input type="file" (change)="onFileChange($event)" accept="image/*" />
+        <button type="submit">{{ editando ? 'ATUALIZAR' : 'CADASTRAR' }}</button>
+      </form>
+      <div *ngIf="imagemPreview">
+        <p>Pré-visualização da imagem:</p>
+        <img [src]="imagemPreview" alt="Pré-visualização" width="120" />
+      </div>
+    </section>
+
+    <section class="table-section">
+      <h3>Produtos - Gerenciar Produtos</h3>
+      <table id="tabela-produtos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NOME</th>
+            <th>CATEGORIA</th>
+            <th>MARCA</th>
+            <th>PREÇO</th>
+            <th>QUANTIDADE</th>
+            <th>AÇÕES</th>
+          </tr>
+        </thead>
+        <tbody id="corpo-tabela">
+          <tr *ngFor="let produto of produtos">
+            <td>{{ produto.id }}</td>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.categoria }}</td>
+            <td>{{ produto.marca }}</td>
+            <td>{{ produto.preco | currency : "BRL" : "symbol" : "1.2-2" }}</td>
+            <td>{{ produto.quantidade }}</td>
+            <td>
+              <button (click)="updateProduct(produto)" title="Atualizar">✏️</button>
+              <button (click)="apagarProduto(produto.id)" title="Apagar">🗑️</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </section>
 
-  <section class="table-section">                                                               
-    <h3>Produtos - Gerenciar Produtos</h3>
-    <table id="tabela-produtos">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>NOME</th>
-          <th>CATEGORIA</th>
-          <th>MARCA</th>
-          <th>PREÇO</th>
-          <th>AÇÕES</th>
-        </tr>
-      </thead>
-      <tbody id="corpo-tabela">
-        <!-- Os produtos serão renderizados aqui -->
-      </tbody>
-    </table>
+  <!-- USUÁRIOS -->
+  <section *ngIf="painelAtivo === 'usuarios'">
+  <section class="form-section">
+    <h3>Usuários - Cadastrar Usuário</h3>
+    <form class="form-container" (ngSubmit)="onSubmitUsuario()" [formGroup]="usuarioForm">
+      <input type="text" formControlName="nome" placeholder="Nome" />
+      <input type="email" formControlName="email" placeholder="E-mail" />
+      <input type="password" formControlName="senha" placeholder="Senha" />
+      <input type="password" formControlName="confirmarSenha" placeholder="Confirmar Senha" />
+      <input type="text" formControlName="telefone" placeholder="Telefone" />
+      <input type="date" formControlName="dataNascimento" placeholder="Data de Nascimento" />
+      <div *ngIf="usuarioForm.errors?.['senhasDiferentes'] && usuarioForm.get('confirmarSenha')?.touched" style="color: red;">
+  As senhas não coincidem.
+</div>
+      <button type="submit">{{ editandoUsuario ? 'ATUALIZAR' : 'CADASTRAR' }}</button>
+    </form>
+  </section>
+
+    <section class="table-section">
+      <h3>Usuários - Gerenciar Usuários</h3>
+      <table id="tabela-usuarios">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NOME</th>
+      <th>E-MAIL</th>
+      <th>TELEFONE</th>
+      <th>DATA NASC.</th>
+      <th>AÇÕES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.id }}</td>
+      <td>{{ usuario.nome }}</td>
+      <td>{{ usuario.email }}</td>
+      <td>{{ usuario.telefone }}</td>
+      <td>{{ usuario.dataNascimento | date:'dd/MM/yyyy' }}</td>
+      <td>
+        <button (click)="editarUsuario(usuario)" title="Atualizar">✏️</button>
+        <button (click)="apagarUsuario(usuario.id)" title="Apagar">🗑️</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+    </section>
   </section>
 </main>
-</body>
