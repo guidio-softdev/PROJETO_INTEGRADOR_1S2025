@@ -6,7 +6,6 @@ import { PainelAdminComponent } from './pages/painel-admin/painel-admin.componen
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { adminAuthGuard } from './pages/guards/admin-auth.guard';
 
-
 export const routes: Routes = [
 
   {
@@ -28,7 +27,6 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: PainelAdminComponent,
-    // canActivate: [adminAuthGuard],
     title: 'Painel Admin',
     children: [
       {

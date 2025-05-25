@@ -1,10 +1,14 @@
-/* IMPORT DE FONTES */
+/* ============================= */
+/* IMPORTAÇÃO DE FONTES         */
+/* ============================= */
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&display=swap');
 
-
-/* ESTILOS GLOBAIS */
-html, body {
+/* ============================= */
+/* ESTILOS GLOBAIS              */
+/* ============================= */
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -13,35 +17,34 @@ html, body {
   color: #ffffff;
 }
 
-
-/* NAVEGAÇÃO PRINCIPAL */
+/* ============================= */
+/* NAVEGAÇÃO PRINCIPAL (Navbar) */
+/* ============================= */
 .main-nav {
-  margin-top: 85px;
-  background-color: #0e151b;
   width: 100%;
+  background-color: #0e151b;
+  padding: 10px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  margin-top: 70px;
 }
 
 .menu {
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
   list-style: none;
   margin: 0;
-  margin-top: 15px;
+  padding: 0;
 }
 
 .menu-item {
   flex: 1;
   text-align: center;
-  padding: 10px 0;
+  padding: 15px 0;
   font-weight: bold;
   background-color: #ffffff;
   color: #0e151b;
   border-right: 1px solid #5BFEFE;
-  transition: background-color 0.3s, color 0.3s;
-  height: 25px;
-  padding-top: 15px;
-  font-size: 15px;
+  transition: all 0.3s ease;
 }
 
 .menu-item:last-child {
@@ -51,10 +54,11 @@ html, body {
 .menu-item:hover {
   background-color: #0e1731;
   color: #ffffff;
-  cursor: pointer;
 }
 
-/* CARRINHO DE COMPRAS */
+/* ============================= */
+/* CARRINHO DE COMPRAS          */
+/* ============================= */
 .cart-sidebar {
   position: fixed;
   top: 0;
@@ -105,8 +109,11 @@ html, body {
   color: #9c9c9c;
 }
 
-/* BANNER PRINCIPAL */
+/* ============================= */
+/* BANNER PRINCIPAL             */
+/* ============================= */
 .banner {
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -169,7 +176,6 @@ html, body {
 .buy-btn {
   background-color: #5BFEFE;
   color: #0e151b;
-  border-radius: 20px;
   width: 140px;
   height: 50px;
   letter-spacing: 3px;
@@ -205,12 +211,14 @@ html, body {
 }
 
 .banner-image .product-image {
-  max-width: 70%;
+  max-width: 50%;
   height: auto;
   margin-left: 30px;
 }
 
-/* CATÁLOGO DE PRODUTOS */
+/* ============================= */
+/* CATÁLOGO DE PRODUTOS         */
+/* ============================= */
 .catalog {
   padding: 40px 0;
 }
@@ -254,16 +262,16 @@ html, body {
   margin: 0 auto;
 }
 
-/* CONTEÚDO PRINCIPAL */
+/* ============================= */
+/* CONTEÚDO PRINCIPAL           */
+/* ============================= */
 .main-content {
   padding: 20px;
 }
 
-.main-content2 {
-  margin-top: 200px;
-}
-
-/* Container principal do card */
+/* ============================= */
+/* CARD DE PRODUTO              */
+/* ============================= */
 .card {
   background-color: #fff;
   color: #000;
@@ -271,7 +279,7 @@ html, body {
   border-radius: 6px;
   overflow: hidden;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   cursor: pointer;
   margin-left: 30px;
@@ -281,10 +289,9 @@ html, body {
 
 .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Estilo da imagem */
 .card img {
   max-width: 100%;
   height: auto;
@@ -292,14 +299,12 @@ html, body {
   margin: 0 auto;
 }
 
-/* Estilo do texto do produto */
 .card p {
   font-size: 10px;
   font-weight: bold;
   padding: 8px;
 }
 
-/* Estilo específico do preço */
 .card .preco {
   font-size: 15px;
   font-weight: bold;
@@ -308,13 +313,11 @@ html, body {
   margin-bottom: 10px;
 }
 
-/* Container dos botões */
 .card-buttons {
   display: flex;
   border: none;
 }
 
-/* Estilo base dos botões */
 .card-buttons button {
   flex: 1;
   padding: 10px 0;
@@ -327,7 +330,6 @@ html, body {
   letter-spacing: 3px;
 }
 
-/* Botão Detalhes */
 .btn-detalhes {
   background-color: #0d1117;
   color: white;
@@ -338,7 +340,6 @@ html, body {
   color: #3CF6F6;
 }
 
-/* Botão Comprar */
 .btn-comprar {
   background-color: #3CF6F6;
   color: black;
