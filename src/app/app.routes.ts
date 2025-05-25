@@ -18,7 +18,7 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     title: 'Pagina de Login'
-  },
+  },    
   {
     path: 'cadastro',
     component: CadastroUsuariosComponent,

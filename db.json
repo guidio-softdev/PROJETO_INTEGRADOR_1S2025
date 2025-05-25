@@ -159,7 +159,7 @@
       "CPF": "333.333.333-33",
       "dataNasc": "23/09/2005",
       "celular": "(11) 96482-8962",
-      "email": "admin@email.com",
+      "email": "admin@gmail.com",
       "senha": "admin123",
       "admin": true
     },
@@ -184,6 +184,17 @@
       "email": "teste@email.com",
       "password": "mat123",
       "confirmPassword": "mat123"
+    },
+    {
+      "id": "a58a",
+      "name": "paulinho",
+      "surname": "guidio",
+      "cpf": "33333333309",
+      "birthdate": "2005-09-23",
+      "phone": "11964828962",
+      "email": "pauloguidio23@gmail",
+      "password": "123456",
+      "confirmPassword": "123456"
     }
   ]
 }

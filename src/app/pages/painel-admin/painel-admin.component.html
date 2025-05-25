@@ -1,1 +1,70 @@
-<p>painel-admin works!</p>
+<body>
+    <!-- Sidebar -->
+<aside>
+  <nav>
+    <ul>
+      <li class="active">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/box.png" width="20" alt="icon">
+        <span>Produto</span>
+      </li>
+      <li>
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/user.png" width="20" alt="icon">
+        <span>Usuários</span>
+      </li>
+      <li>
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/settings.png" width="20" alt="icon">
+        <span>Configurações</span>
+      </li>
+      <li>
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/help.png" width="20" alt="icon">
+        <span>Ajuda</span>
+      </li>
+      <li>
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/exit.png" width="20" alt="icon">
+        <span routerLink="">Sair</span>
+      </li>
+    </ul>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<main>
+  <header>
+    <h2>Bem-vindo de volta, <span>Administrador</span>!</h2>
+    <div class="user">
+      <img src="https://img.icons8.com/ios-filled/50/000000/user.png" width="24" alt="user-icon">
+      <span>ADMIN</span>
+    </div>
+  </header>
+
+  <section class="form-section">
+    <h3>Produtos - Cadastrar Produtos</h3>
+    <div class="form-container">
+      <input type="text" id="nome" placeholder="Nome">
+      <input type="text" id="categoria" placeholder="Categoria">
+      <input type="text" id="preco" placeholder="Preço">
+      <input type="text" id="marca" placeholder="Marca">
+      <button>CADASTRAR</button>
+    </div>
+  </section>
+
+  <section class="table-section">                                                               
+    <h3>Produtos - Gerenciar Produtos</h3>
+    <table id="tabela-produtos">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOME</th>
+          <th>CATEGORIA</th>
+          <th>MARCA</th>
+          <th>PREÇO</th>
+          <th>AÇÕES</th>
+        </tr>
+      </thead>
+      <tbody id="corpo-tabela">
+        <!-- Os produtos serão renderizados aqui -->
+      </tbody>
+    </table>
+  </section>
+</main>
+</body>

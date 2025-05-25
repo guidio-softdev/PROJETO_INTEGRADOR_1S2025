@@ -1,3 +1,10 @@
+/* ============================= */
+/* IMPORTAÇÃO DE FONTES         */
+/* ============================= */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&display=swap');
+
+
 .main-header {
   background-color: #0E151B;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
