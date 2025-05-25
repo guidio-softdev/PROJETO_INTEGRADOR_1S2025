@@ -3,6 +3,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CadastroUsuariosComponent } from './pages/cadastro-usuarios/cadastro-usuarios.component';
 import { PainelAdminComponent } from './pages/painel-admin/painel-admin.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { adminAuthGuard } from './pages/guards/admin-auth.guard';
 
 export const routes: Routes = [
 
@@ -25,6 +27,19 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: PainelAdminComponent,
-    title: 'Painel Admin'
+    title: 'Painel Admin',
+    children: [
+      {
+        path: '',
+        component: DashboardComponent,
+        title: 'Dashboard'
+      }
+    ]
+  },
+  
+  // Rota coringa para página não encontrada (opcional)
+  {
+    path: '**',
+    redirectTo: ''
   }
 ]

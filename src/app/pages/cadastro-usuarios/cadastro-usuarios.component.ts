@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cadastro-usuarios',
@@ -13,9 +14,28 @@ export class CadastroUsuariosComponent {
   signupForm!: FormGroup;
   isLoading = signal(false);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.signupForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
+      surname: ['', [Validators.required, Validators.minLength(2)]],
+      cpf: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+          Validators.pattern(/^\d{11}$/)
+        ]
+      ],
+      birthdate: ['', [Validators.required]], // Corrigido aqui
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11), // Corrigido para 11 dígitos (celular)
+          Validators.pattern(/^\d+$/)
+        ]
+      ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
@@ -42,8 +62,7 @@ export class CadastroUsuariosComponent {
     if (this.signupForm.valid) {
       this.isLoading.set(true);
       try {
-        // Simule o cadastro
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await this.http.post('http://localhost:3000/usuarios', this.signupForm.value).toPromise();
         alert('Cadastro realizado com sucesso!');
         this.signupForm.reset();
       } catch {

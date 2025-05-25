@@ -1,0 +1,185 @@
+<div class="dashboard-container">
+  <app-breadcrumb></app-breadcrumb>
+
+  <h1 class="page-title">Dashboard</h1>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon products-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-title">Total Products</h3>
+        <p class="stat-value">{{ productCount }}</p>
+        <p class="stat-info">{{ activeProductCount }} active</p>
+      </div>
+      <a routerLink="/admin/products" class="stat-link">View all</a>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon users-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-title">Total Users</h3>
+        <p class="stat-value">{{ userCount }}</p>
+        <p class="stat-info">{{ activeUserCount }} active</p>
+      </div>
+      <a routerLink="/admin/users" class="stat-link">View all</a>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon low-stock-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2m5.66 0H14a2 2 0 0 1 2 2v3.34"
+          ></path>
+          <path d="M3 7l5 5"></path>
+          <path d="M8 7l-5 5"></path>
+          <line x1="14" y1="14" x2="14" y2="14"></line>
+          <circle cx="18" cy="18" r="4"></circle>
+          <path d="M18 16v4"></path>
+        </svg>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-title">Low Stock Items</h3>
+        <p class="stat-value">{{ lowStockCount }}</p>
+        <p class="stat-info">Below minimum</p>
+      </div>
+      <a
+        routerLink="/admin/products"
+        [queryParams]="{ stock: 'low' }"
+        class="stat-link"
+        >View all</a
+      >
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="card recent-products">
+      <div class="card-header">
+        <h2>Recent Products</h2>
+        <a routerLink="/admin/products" class="btn btn-sm btn-primary"
+          >View All</a
+        >
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of recentProducts">
+                <td>
+                  <div class="product-cell">
+                    <div class="product-image" *ngIf="product.imageUrl">
+                      <img [src]="product.imageUrl" [alt]="product.name" />
+                    </div>
+                    <div class="product-info">
+                      <div class="product-name">{{ product.name }}</div>
+                      <div class="product-sku">SKU: {{ product.sku }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>${{ product.price.toFixed(2) }}</td>
+                <td>
+                  <span class="status-badge" [class]="product.status">
+                    {{ product.status === "active" ? "Active" : "Inactive" }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card recent-users">
+      <div class="card-header">
+        <h2>Recent Users</h2>
+        <a routerLink="/admin/users" class="btn btn-sm btn-primary">View All</a>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Role</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of recentUsers">
+                <td>
+                  <div class="user-cell">
+                    <div class="user-info">
+                      <div class="user-name">
+                        {{ user.firstName }} {{ user.lastName }}
+                      </div>
+                      <div class="user-email">{{ user.email }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="role-badge" [class]="user.role">{{
+                    user.role
+                  }}</span>
+                </td>
+                <td>
+                  <span class="status-badge" [class]="user.status">{{
+                    user.status
+                  }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
