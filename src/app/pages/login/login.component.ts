@@ -1,10 +1,11 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 // Importe o componente de cadastro se for standalone
 import { CadastroUsuariosComponent } from '../cadastro-usuarios/cadastro-usuarios.component';
 import { HttpClient } from '@angular/common/http';
+import { VisibilityService } from '../../services/visibility.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   isLoginMode = signal(true);
   errorMessage = signal('');
   successMessage = signal('');
@@ -21,11 +22,21 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private http:HttpClient) {}
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private visibilityService: VisibilityService) {
+      this.ngOnInit();
+  }
 
   ngOnInit(): void {
     this.initializeForms();
+    this.visibilityService.setHeaderVisibility(false);
+    this.visibilityService.setFooterVisibility(false);
   }
+  ngOnDestroy() {
+    this.visibilityService.setHeaderVisibility(true);
+    this.visibilityService.setFooterVisibility(true);
+  }
+
+
 
   private initializeForms(): void {
     this.loginForm = this.fb.group({
@@ -39,21 +50,21 @@ export class LoginComponent implements OnInit {
     this.clearMessages();
   }
 
-    async onLogin(): Promise<void> {
+  async onLogin(): Promise<void> {
     if (this.loginForm.valid) {
       this.isLoading.set(true);
-  
+
       try {
         const { email, password } = this.loginForm.value;
-  
+
         // Busca usuário no "banco"
         const users: any = await this.http
           .get<any[]>(`http://localhost:3000/usuarios?email=${email}&password=${password}`)
           .toPromise();
-  
+
         if (users && users.length > 0) {
           const user = users[0];
-          if (user.role === 'admin') {
+          if (user.admin === true) {
             this.showSuccess('Login de admin realizado com sucesso!');
             setTimeout(() => {
               this.router.navigate(['/admin']);
@@ -102,34 +113,34 @@ export class LoginComponent implements OnInit {
     }
   }
 
-onForgotPassword(): void {
-  const email = prompt('Digite seu e-mail para recuperação de senha:');
-  if (email && this.isValidEmail(email)) {
-    // Busca o usuário pelo e-mail
-    this.http.get<any[]>(`http://localhost:3000/usuarios?email=${email}`).subscribe(users => {
-      if (users && users.length > 0) {
-        const user = users[0];
-        const newPassword = prompt('Digite a nova senha:');
-        if (newPassword && newPassword.length >= 6) {
-          // Atualiza a senha no json-server
-          this.http.patch(`http://localhost:3000/usuarios/${user.id}`, { password: newPassword }).subscribe(() => {
-            this.showSuccess('Senha redefinida com sucesso!');
-          }, () => {
-            this.showError('Erro ao atualizar a senha.');
-          });
+  onForgotPassword(): void {
+    const email = prompt('Digite seu e-mail para recuperação de senha:');
+    if (email && this.isValidEmail(email)) {
+      // Busca o usuário pelo e-mail
+      this.http.get<any[]>(`http://localhost:3000/usuarios?email=${email}`).subscribe(users => {
+        if (users && users.length > 0) {
+          const user = users[0];
+          const newPassword = prompt('Digite a nova senha:');
+          if (newPassword && newPassword.length >= 6) {
+            // Atualiza a senha no json-server
+            this.http.patch(`http://localhost:3000/usuarios/${user.id}`, { password: newPassword }).subscribe(() => {
+              this.showSuccess('Senha redefinida com sucesso!');
+            }, () => {
+              this.showError('Erro ao atualizar a senha.');
+            });
+          } else {
+            this.showError('A senha deve ter pelo menos 6 caracteres.');
+          }
         } else {
-          this.showError('A senha deve ter pelo menos 6 caracteres.');
+          this.showError('E-mail não encontrado.');
         }
-      } else {
-        this.showError('E-mail não encontrado.');
-      }
-    }, () => {
-      this.showError('Erro ao buscar usuário.');
-    });
-  } else if (email) {
-    this.showError('Por favor, digite um e-mail válido.');
+      }, () => {
+        this.showError('Erro ao buscar usuário.');
+      });
+    } else if (email) {
+      this.showError('Por favor, digite um e-mail válido.');
+    }
   }
-}
 
   // Utilitários
   private showError(message: string): void {
