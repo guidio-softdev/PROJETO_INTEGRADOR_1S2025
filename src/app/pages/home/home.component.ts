@@ -19,11 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private service: ProdutoService,
     private router: Router,
     private visibilityService: VisibilityService
-  ) {
-
-    this.ngOnInit();
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.visibilityService.setHeaderVisibility(true);

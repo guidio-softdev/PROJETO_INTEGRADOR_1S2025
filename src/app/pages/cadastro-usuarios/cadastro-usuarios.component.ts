@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-cadastro-usuarios',
@@ -10,68 +10,73 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './cadastro-usuarios.component.html',
   styleUrls: ['./cadastro-usuarios.component.css']
 })
-export class CadastroUsuariosComponent {
-  signupForm!: FormGroup;
-  isLoading = signal(false);
+export class CadastroUsuariosComponent implements OnInit{
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
-    this.signupForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      surname: ['', [Validators.required, Validators.minLength(2)]],
-      cpf: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(11),
-          Validators.maxLength(11),
-          Validators.pattern(/^\d{11}$/)
-        ]
-      ],
-      birthdate: ['', [Validators.required]], // Corrigido aqui
-      phone: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(11), // Corrigido para 11 dígitos (celular)
-          Validators.pattern(/^\d+$/)
-        ]
-      ],
+  usuarios: any[] = [];
+  usuarioForm!: FormGroup;
+
+  ngOnInit(): void {
+      this.inicializarFormulario();
+  }
+
+  // Método para enviar o formulário de cadastro
+  cadastrarNovoUsuario(): void {
+    // Verifica se o formulário é válido
+    if (this.usuarioForm.valid) {
+      // Prepara os dados do usuário, removendo a confirmação de senha
+      const novoUsuario = {
+        nome: this.usuarioForm.value.nome,
+        email: this.usuarioForm.value.email,
+        senha: this.usuarioForm.value.senha,
+        telefone: this.usuarioForm.value.telefone,
+        dataNascimento: this.usuarioForm.value.dataNascimento
+      };
+
+      // Chama o serviço para criar o usuário
+      this.usuarioService.createUserLogin(novoUsuario).subscribe({
+        next: () => {
+          alert('Usuário cadastrado com sucesso!');
+          this.usuarioForm.reset(); // Limpa o formulário
+          this.carregarUsuarios(); // Atualiza a lista de usuários
+        },
+        error: (erro) => {
+          console.error('Erro no cadastro:', erro);
+          alert('Erro ao cadastrar usuário!');
+        }
+      });
+    }
+  }
+
+  inicializarFormulario(): void {
+    this.usuarioForm = this.fb.group({
+      nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
-    }, { validators: this.passwordMatchValidator });
+      senha: ['', [Validators.required, Validators.minLength(6)]],
+      confirmarSenha: ['', Validators.required],
+      telefone: [''],
+      dataNascimento: ['']
+    }, { validators: this.senhasIguaisValidator });
   }
 
-  private passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatch: true });
-      return { passwordMismatch: true };
-    }
-    if (confirmPassword?.hasError('passwordMismatch')) {
-      delete confirmPassword.errors?.['passwordMismatch'];
-      if (Object.keys(confirmPassword.errors || {}).length === 0) {
-        confirmPassword.setErrors(null);
-      }
-    }
-    return null;
+  senhasIguaisValidator(form: FormGroup) {
+    return form.get('senha')?.value === form.get('confirmarSenha')?.value 
+      ? null : { senhasDiferentes: true };
   }
 
-  async onSignup(): Promise<void> {
-    if (this.signupForm.valid) {
-      this.isLoading.set(true);
-      try {
-        await this.http.post('http://localhost:3000/usuarios', this.signupForm.value).toPromise();
-        alert('Cadastro realizado com sucesso!');
-        this.signupForm.reset();
-      } catch {
-        alert('Erro ao cadastrar!');
-      } finally {
-        this.isLoading.set(false);
+  // Método auxiliar para carregar usuários (necessário para atualizar a lista)
+  carregarUsuarios() {
+    this.usuarioService.getAll().subscribe({
+      next: (usuarios) => {
+        this.usuarios = usuarios;
+      },
+      error: (erro) => {
+        console.error('Erro ao carregar usuários:', erro);
       }
-    } else {
-      Object.values(this.signupForm.controls).forEach(control => control.markAsTouched());
-    }
+    });
   }
+
+  constructor(private fb: FormBuilder,
+    private usuarioService: UsuarioService,
+    private cdr: ChangeDetectorRef) { }
+
 }

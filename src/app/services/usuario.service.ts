@@ -20,15 +20,19 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.API}/${id}`);
   }
 
-  createUser(productData: Partial<Usuario>): Observable<Usuario> {
-    return this.http.post<Usuario>(this.API, productData);
+  createUser(userData: Partial<Usuario>): Observable<Usuario> {
+    return this.http.post<Usuario>(this.API, userData);
   }
 
-  updateUser(id: number, productData: Partial<Usuario>): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.API}/${id}`, productData);
+  updateUser(id: number, userData: Partial<Usuario>): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.API}/${id}`, userData);
   }
 
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.API}/${id}`);
   }
+
+  createUserLogin(usuarioData: any): Observable<any> {
+  return this.http.post<Usuario>(this.API, usuarioData);
+}
 }

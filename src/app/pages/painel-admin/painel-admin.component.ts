@@ -71,7 +71,6 @@ export class PainelAdminComponent implements OnInit, OnDestroy {
         email: ['', [Validators.required, Validators.email]],
         senha: ['', [Validators.required, Validators.minLength(6)]],
         confirmarSenha: ['', [Validators.required]],
-        perfil: ['', Validators.required],
         telefone: [''],
         dataNascimento: [''],
       },
@@ -203,7 +202,7 @@ senhasIguaisValidator(form: FormGroup) {
           this.editandoUsuario = false;
           this.usuarioEditandoId = null;
           this.carregarUsuarios();
-          this.cdr.detectChanges(); // <-- força atualização do template
+          this.cdr.detectChanges();
         },
         error: () => {
           alert('Erro ao atualizar usuário!');
@@ -231,7 +230,6 @@ senhasIguaisValidator(form: FormGroup) {
     email: usuario.email,
     senha: '', 
     confirmarSenha: '',
-    perfil: usuario.perfil,
     telefone: usuario.telefone,
     dataNascimento: usuario.dataNascimento
   });

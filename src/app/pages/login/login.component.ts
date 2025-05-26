@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private visibilityService: VisibilityService) {
-      this.ngOnInit();
+    this.ngOnInit();
   }
 
   ngOnInit(): void {
@@ -53,33 +53,45 @@ export class LoginComponent implements OnInit, OnDestroy {
   async onLogin(): Promise<void> {
     if (this.loginForm.valid) {
       this.isLoading.set(true);
+      const { email, password } = this.loginForm.value;
 
       try {
-        const { email, password } = this.loginForm.value;
+        // Busca TODOS os usuários no banco de dados
+        const allUsers = await this.http
+          .get<any[]>(`http://localhost:3000/usuarios?email=${email}`)
+          .toPromise() as any[];
 
-        // Busca usuário no "banco"
-        const users: any = await this.http
-          .get<any[]>(`http://localhost:3000/usuarios?email=${email}&password=${password}`)
-          .toPromise();
-
-        if (users && users.length > 0) {
-          const user = users[0];
-          if (user.admin === true) {
-            this.showSuccess('Login de admin realizado com sucesso!');
-            setTimeout(() => {
-              this.router.navigate(['/admin']);
-            }, 1000);
-          } else {
-            this.showSuccess('Login realizado com sucesso!');
-            setTimeout(() => {
-              this.router.navigate(['/dashboard']);
-            }, 1000);
-          }
-        } else {
-          this.showError('Usuário ou senha inválidos.');
+        if (!allUsers || allUsers.length === 0) {
+          this.showError('Nenhum usuário cadastrado no sistema.');
+          return;
         }
+
+        // Procura o usuário com email correspondente
+        const foundUser = allUsers.find(user => user.email === email);
+
+        if (!foundUser) {
+          this.showError('E-mail não encontrado.');
+          return;
+        }
+
+        // Verifica a senha
+        if (foundUser.senha !== password) {
+          this.showError('Senha incorreta.');
+          return;
+        }
+
+        // Redireciona conforme o tipo de usuário
+        if (foundUser.admin) {
+          this.showSuccess('Login de admin realizado com sucesso!');
+          setTimeout(() => this.router.navigate(['/admin']), 1000);
+        } else {
+          this.showSuccess('Login realizado com sucesso!');
+          setTimeout(() => this.router.navigate(['/dashboard']), 1000);
+        }
+
       } catch (error) {
         this.showError('Erro ao fazer login. Tente novamente.');
+        console.error('Erro no login:', error);
       } finally {
         this.isLoading.set(false);
       }

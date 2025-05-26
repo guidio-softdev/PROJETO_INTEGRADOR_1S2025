@@ -1,11 +1,11 @@
 export interface Usuario {
 
-    id: number;
-    name: string;
-    surname: string;
-    cpf: string;
-    birthdate: Date;
-    phone: string;
+    id?: number;
+    nome: string;
     email: string;
-    password: string;
+    senha: string;
+    telefone?: string;
+    dataNascimento?: string;
+
+
 }

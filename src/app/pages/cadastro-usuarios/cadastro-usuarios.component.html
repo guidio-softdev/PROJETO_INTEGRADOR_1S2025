@@ -1,116 +1,35 @@
-<div class="form-section">
-  <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+<div>
+  <form [formGroup]="usuarioForm" (ngSubmit)="cadastrarNovoUsuario()">
     <div class="form-group">
       <label for="signupName">Nome</label>
-      <input
-        type="text"
-        id="signupName"
-        formControlName="name"
-        [class.error]="signupForm.get('name')?.invalid && signupForm.get('name')?.touched"
-      />
-      <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched" class="field-error">
-        <div *ngIf="signupForm.get('name')?.errors?.['required']">Nome é obrigatório</div>
-        <div *ngIf="signupForm.get('name')?.errors?.['minlength']">Nome deve ter pelo menos 2 caracteres</div>
-      </div>
+      <input formControlName="nome" type="text" placeholder="Nome" >
     </div>
-    <div class="form-group">
-      <label for="signupSurname">Sobrenome</label>
-      <input
-        type="text"
-        id="signupSurname"
-        formControlName="surname"
-        [class.error]="signupForm.get('surname')?.invalid && signupForm.get('surname')?.touched"
-      />
-      <div *ngIf="signupForm.get('surname')?.invalid && signupForm.get('surname')?.touched" class="field-error">
-        <div *ngIf="signupForm.get('surname')?.errors?.['required']">Sobrenome é obrigatório</div>
-        <div *ngIf="signupForm.get('surname')?.errors?.['minlength']">Sobrenome deve ter pelo menos 2 caracteres</div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="signupCpf">CPF</label>
-      <input
-        type="text"
-        id="signupCpf"
-        formControlName="cpf"
-        maxlength="11"
-        [class.error]="signupForm.get('cpf')?.invalid && signupForm.get('cpf')?.touched"
-      />
-      <div *ngIf="signupForm.get('cpf')?.invalid && signupForm.get('cpf')?.touched" class="field-error">
-        <div *ngIf="signupForm.get('cpf')?.errors?.['required']">CPF é obrigatório</div>
-        <div *ngIf="signupForm.get('cpf')?.errors?.['minlength'] || signupForm.get('cpf')?.errors?.['maxlength']">CPF deve ter 11 caracteres</div>
-      </div>
-    </div>
+    
     <div class="form-group">
       <label for="signupBirthdate">Data de Nascimento</label>
-      <input
-        type="date"
-        id="signupBirthdate"
-        formControlName="birthdate"
-        [class.error]="signupForm.get('birthdate')?.invalid && signupForm.get('birthdate')?.touched"
-      />
-      <div *ngIf="signupForm.get('birthdate')?.invalid && signupForm.get('birthdate')?.touched" class="field-error">
-        <div *ngIf="signupForm.get('birthdate')?.errors?.['required']">Data de nascimento é obrigatória</div>
-      </div>
+      <input formControlName="dataNascimento" type="date">
     </div>
+    
     <div class="form-group">
       <label for="signupPhone">Telefone Celular</label>
-      <input
-        type="text"
-        id="signupPhone"
-        formControlName="phone"
-        maxlength="15"
-        [class.error]="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched"
-      />
-      <div *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched" class="field-error">
-        <div *ngIf="signupForm.get('phone')?.errors?.['required']">Telefone é obrigatório</div>
-        <div *ngIf="signupForm.get('phone')?.errors?.['minlength']">Telefone deve ter pelo menos 11 caracteres</div>
-      </div>
+      <input formControlName="telefone" type="tel" placeholder="Telefone">
     </div>
+    
     <div class="form-group">
       <label for="signupEmail">E-mail</label>
-      <input
-        type="email"
-        id="signupEmail"
-        formControlName="email"
-        [class.error]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
-      />
-      <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="field-error">
-        <div *ngIf="signupForm.get('email')?.errors?.['required']">E-mail é obrigatório</div>
-        <div *ngIf="signupForm.get('email')?.errors?.['email']">E-mail inválido</div>
-      </div>
+      <input formControlName="email" type="email" placeholder="E-mail">
     </div>
+    
     <div class="form-group">
       <label for="signupPassword">Senha</label>
-      <input
-        type="password"
-        id="signupPassword"
-        formControlName="password"
-        [class.error]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
-      />
-      <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="field-error">
-        <div *ngIf="signupForm.get('password')?.errors?.['required']">Senha é obrigatória</div>
-        <div *ngIf="signupForm.get('password')?.errors?.['minlength']">Senha deve ter pelo menos 6 caracteres</div>
-      </div>
+      <input formControlName="senha" type="password" placeholder="Senha">
     </div>
+    
     <div class="form-group">
       <label for="signupConfirmPassword">Confirmar Senha</label>
-      <input
-        type="password"
-        id="signupConfirmPassword"
-        formControlName="confirmPassword"
-        [class.error]="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched"
-      />
-      <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="field-error">
-        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['required']">Confirmação de senha é obrigatória</div>
-        <div *ngIf="signupForm.get('confirmPassword')?.errors?.['passwordMismatch']">As senhas não coincidem</div>
-      </div>
+      <input formControlName="confirmarSenha" type="password" placeholder="Confirme a senha">
     </div>
-    <button type="submit" class="btn-primary" [disabled]="isLoading()">
-      <ng-container *ngIf="isLoading(); else signupText">
-        <span class="spinner"></span>
-        Cadastrando...
-      </ng-container>
-      <ng-template #signupText> Cadastrar </ng-template>
-    </button>
+    
+    <button type="submit" [disabled]="!usuarioForm.valid">Cadastrar</button>
   </form>
 </div>
