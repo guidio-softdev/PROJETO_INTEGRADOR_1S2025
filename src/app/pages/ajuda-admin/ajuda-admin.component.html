@@ -1,0 +1,71 @@
+<aside>
+  <nav>
+    <ul>
+      <li [class.active]="painelAtivo === 'produtos'" (click)="selecionarPainel('produtos')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/box.png" width="20" alt="icon" />
+        <span>Produto</span>
+      </li>
+      <li [class.active]="painelAtivo === 'usuarios'" (click)="selecionarPainel('usuarios')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/user.png" width="20" alt="icon" />
+        <span>Usuários</span>
+      </li>
+      <!-- <li>
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/settings.png" width="20" alt="icon" />
+        <span>Configurações</span>
+      </li> -->
+      <li class="active">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/help.png" width="20" alt="icon" />
+        <span>Ajuda</span>
+      </li>
+      <li [class.active]="painelAtivo === 'sair'" (click)="selecionarPainel('sair')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/exit.png" width="20" alt="icon" />
+        <span routerLink="">Sair</span>
+      </li>
+    </ul>
+  </nav>
+</aside>
+<main>
+  <header>
+    <h2>Central de <span>Ajuda</span></h2>
+    <div class="user">
+      <img src="https://img.icons8.com/ios-filled/50/000000/user.png" width="24" alt="user-icon" />
+      <span>ADMIN</span>
+    </div>
+  </header>
+
+  <section class="form-section">
+    <h3>Perguntas Frequentes</h3>
+
+    <div class="faq-item">
+      <strong>1. Como cadastrar um produto?</strong>
+      <p>
+        Acesse a aba <b>Produto</b> no menu lateral. Preencha os campos "Nome", "Categoria", "Preço" e "Marca" no formulário e clique em <b>CADASTRAR</b>. O produto será adicionado à lista automaticamente.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <strong>2. Como editar informações de um produto?</strong>
+      <p>
+        Na tabela de produtos, localize o produto desejado e clique no botão de <b>editar</b> (ícone de lápis). Faça as alterações necessárias e salve para atualizar as informações.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <strong>3. Como excluir um produto?</strong>
+      <p>
+        Na tabela de produtos, encontre o produto que deseja remover e clique no botão de <b>excluir</b> (ícone de lixeira). Confirme a exclusão quando solicitado. O produto será removido da lista imediatamente.
+      </p>
+    </div>
+
+    <div class="faq-item">
+      <strong>4. Como entrar em contato com o suporte?</strong>
+      <p>
+        Caso não encontre sua dúvida aqui, envie um e-mail para <strong>suporte&#64;techstorm.com</strong> ou utilize o formulário de contato disponível na área de configurações.
+      </p>
+    </div>
+
+    <!-- <button type="button" routerLink="/admin" class="btn btn-secondary" style="margin-top: 24px;">
+      Voltar ao Painel Admin
+    </button> -->
+  </section>
+</main>
