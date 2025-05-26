@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { VisibilityService } from '../../services/visibility.service';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-home',
   imports: [CommonModule],
