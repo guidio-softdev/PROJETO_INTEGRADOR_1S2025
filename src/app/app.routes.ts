@@ -33,8 +33,6 @@ export const routes: Routes = [
   component: AjudaAdminComponent,
   title: 'Ajuda Admin'
 },
-  
-  // Rota coringa para página não encontrada (opcional)
   {
     path: '**',
     redirectTo: ''
