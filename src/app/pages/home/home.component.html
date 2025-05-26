@@ -50,7 +50,7 @@
         @for (produtos of ListaProdutos; track produtos) {
 
         <div class="card">
-          <img [src]="'assets/imagens/' + produtos.imagem" [alt]="produtos.nome">
+          <img [src]="produtos.imagem" [alt]="produtos.nome">
           <p><strong>{{produtos.nome}}</strong></p>
           <p class="preco">R$ {{ produtos.preco.toFixed(2).replace('.', ',') }}</p>
           <div class="card-buttons">
